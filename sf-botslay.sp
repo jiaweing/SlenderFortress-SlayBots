@@ -9,11 +9,11 @@ public Plugin myinfo =
 };
 
 public void OnPluginStart() {
-	HookEvent("player_death", SF2_PlayerDeath);
+	HookEvent("player_death", SF2_PlayerDeath, EventHookMode_Post);
 }
 
 public void OnPluginEnd() {
-	UnhookEvent("player_death", SF2_PlayerDeath);
+	UnhookEvent("player_death", SF2_PlayerDeath, EventHookMode_Post);
 }
 
 public Action SF2_PlayerDeath(Handle hEvent, const char[] sEventName, bool bDontBroadcast)
@@ -33,7 +33,7 @@ stock int GetPlayerTeamCount(int iTeam)
 	int iCount;
 	for (int i = 1; i <= MaxClients; i++)
 	{
-		if (IsValidClient(i) && !IsFakeClient(i) && GetClientTeam(i) == iTeam)
+		if (IsValidClient(i) && !IsFakeClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == iTeam)
 			iCount++;
 	}
 	
