@@ -18,6 +18,11 @@ public void OnPluginEnd() {
 
 public Action SF2_PlayerDeath(Handle hEvent, const char[] sEventName, bool bDontBroadcast)
 {
+	CreateTimer(1.0, Timer_UpdateBots, _, TIMER_FLAG_NO_MAPCHANGE);
+}
+
+public Action Timer_UpdateBots(Handle hTimer)
+{
 	if (GetPlayerTeamCount(2) == 0 && GetPlayerCount() > 0)
 	{
 		for (int i = 1; i <= MaxClients; i++)
